@@ -7,14 +7,14 @@ templ WebHtml() {
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<title>Pixel Art Scaler Test</title>
-			<link href="css/style.css" rel="stylesheet"/>
+			<link href="/assets/css/style.css" rel="stylesheet"/>
 		</head>
 		@MainBody()
 	</html>
 }
 
 templ MainBody() {
-	<div>
+	<div class="m-3">
 		@InputFormImage()
 		@ViewImage()
 	</div>

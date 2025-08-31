@@ -8,6 +8,8 @@ import (
 )
 
 func main() {
+	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		main := page.WebHtml()
 
