@@ -1,0 +1,21 @@
+package page
+
+templ WebHtml() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>Pixel Art Scaler Test</title>
+			<link href="css/style.css" rel="stylesheet"/>
+		</head>
+		@MainBody()
+	</html>
+}
+
+templ MainBody() {
+	<div>
+		@InputFormImage()
+		@ViewImage()
+	</div>
+}
