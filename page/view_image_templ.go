@@ -29,7 +29,7 @@ func ViewImage() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"mt-8 flex flex-col items-center space-y-2\"><label for=\"NewPicture\" class=\"text-sm font-medium text-gray-700\">View Image</label><div class=\"border border-gray-300 shadow-md rounded-lg overflow-hidden\"><canvas id=\"remoteCanvas\" width=\"1000\" height=\"400\" class=\"max-w-full h-auto bg-gray-100\"></canvas></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex flex-col w-full h-svh mr-2\"><label for=\"NewPicture\" class=\"text-sm font-medium text-gray-700\">View Image</label><div class=\"flex-1 border border-gray-300 shadow-md rounded-lg overflow-hidden\"><canvas id=\"remoteCanvas\" class=\"w-full h-full block bg-gray-100\"></canvas></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

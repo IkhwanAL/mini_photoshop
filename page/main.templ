@@ -8,13 +8,16 @@ templ WebHtml() {
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<title>Pixel Art Scaler Test</title>
 			<link href="/assets/css/style.css" rel="stylesheet"/>
+			<script src="/assets/js/init.js" defer></script>
 		</head>
-		@MainBody()
+		<body class="bg-gray-400">
+			@MainBody()
+		</body>
 	</html>
 }
 
 templ MainBody() {
-	<div class="m-3">
+	<div class="flex flex-row">
 		@InputFormImage()
 		@ViewImage()
 	</div>
