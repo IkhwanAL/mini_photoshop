@@ -8,7 +8,7 @@ package page
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func ViewImage() templ.Component {
+func OverViewImage() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,7 +29,7 @@ func ViewImage() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex flex-col w-full h-svh mr-2\"><label for=\"editZone\" class=\"text-sm font-medium text-gray-700 text-center\">Edit Zone</label><div class=\"flex-1 border border-gray-300 shadow-md rounded-lg overflow-hidden\"><canvas id=\"remoteCanvas\" class=\"w-full h-full block bg-gray-100\"></canvas></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div><table><caption></caption> <thead><tr><th scope=\"col\">Key:</th><th scope=\"col\">Value: </th></tr></thead> <tbody><tr><td scope=\"row\">Key:</td><td scope=\"row\">Value: </td></tr></tbody></table></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
