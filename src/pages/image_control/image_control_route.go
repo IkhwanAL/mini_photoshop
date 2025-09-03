@@ -1,18 +1,17 @@
-package routes
+package imagecontrol
 
 import (
 	"io"
 	"net/http"
 	"os"
 	"strconv"
-
-	"github.com/ikhwanal/pixel_art_scaler/page"
 )
 
 type FileHeader struct {
 	Filename string
 	Width int
 	Height int
+	Size int
 }
 
 func UploadImage(w http.ResponseWriter, r *http.Request) {
@@ -31,14 +30,20 @@ func UploadImage(w http.ResponseWriter, r *http.Request) {
 
 	width, err := strconv.Atoi(r.FormValue("width"))
 	if err != nil {
-		http.Error(w, "opps my mistake need to handle the error", http.StatusInternalServerError)
+		http.Error(w, "opps failed to get width file header", http.StatusInternalServerError)
+		return
 	} 
 	height, err := strconv.Atoi(r.FormValue("height"))
+	if err != nil {
+		http.Error(w, "oops failed to get height file header", http.StatusInternalServerError)
+		return
+	}
 
 	fileHeader := FileHeader{
 		Filename: header.Filename,
 		Width: width,
 		Height: height,
+		Size: int(header.Size),
 	}
 
 	outFile, err :=os.Create("./uploads/" + header.Filename)
@@ -52,7 +57,8 @@ func UploadImage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "failed to write file", http.StatusInternalServerError)
 		return
 	}
-	page.OverViewImage().Render(r.Context(), w)
-
-	return
+	err = OverViewImage(fileHeader).Render(r.Context(), w)
+	if err != nil {
+		http.Error(w, "failed to show result", http.StatusInternalServerError)
+	}
 }

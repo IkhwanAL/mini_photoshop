@@ -1,0 +1,29 @@
+package imagecontrol
+
+templ OverViewImage(header FileHeader) {
+	<div class="max-w-md bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+		<div class="px-4 py-3 bg-gray-50 border-b border-gray-200 font-semibold">
+			Image Header
+		</div>
+		<table class="w-full text-sm">
+			<tbody class="divide-y divide-gray-200">
+				<tr>
+					<th scope="row" class="w-1/3 text-left font-medium text-gray-700 px-4 py-2">Filename</th>
+					<td scope="row" class="px-4 py-2 text-gray-900">{ header.Filename }</td>
+				</tr>
+				<tr>
+					<th scope="row" class="w-1/3 text-left font-medium text-gray-700 px-4 py-2">Width</th>
+					<td scope="row" class="px-4 py-2 text-gray-900">{ header.Width }</td>
+				</tr>
+				<tr>
+					<th scope="row" class="w-1/3 text-left font-medium text-gray-700 px-4 py-2">Height</th>
+					<td scope="row" class="px-4 py-2 text-gray-900">{ header.Height }</td>
+				</tr>
+				<tr>
+					<th scope="row" class="w-1/3 text-left font-medium text-gray-700 px-4 py-2">Size</th>
+					<td scope="row" class="px-4 py-2 text-gray-900">{ header.Size }</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+}

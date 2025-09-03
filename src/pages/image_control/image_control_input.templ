@@ -1,8 +1,14 @@
-package page
+package imagecontrol
 
 templ InputFormImage() {
 	<div class="p-6 mr-1 max-w-md w-full h-svh mx-auto bg-white shadow-sm shadow-gray-900 rounded-lg">
-		<form class="space-y-4" hx-post="/upload-image" enctype="multipart/form-data">
+		<form
+			class="space-y-4"
+			hx-post="/upload-image"
+			enctype="multipart/form-data"
+			hx-swap="innerHTML"
+			hx-target="#overview"
+		>
 			<div class="flex flex-col space-y-1">
 				<label for="inFile" class="text-sm font-medium text-gray-700">Input File</label>
 				<input
@@ -32,10 +38,10 @@ templ InputFormImage() {
 				/>
 			</div>
 			<div class="flex flex-col space-y-1">
-				<label for="heigth" class="text-sm font-medium text-gray-700">Height</label>
+				<label for="height" class="text-sm font-medium text-gray-700">Height</label>
 				<input
 					type="text"
-					name="heigth"
+					name="height"
 					class="rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
 				/>
 			</div>
@@ -46,8 +52,6 @@ templ InputFormImage() {
 				Submit
 			</button>
 		</form>
-		<div id="result" class="mt-2">
-			<p>HASD</p>
-		</div>
+		<div id="overview" class="mt-2"></div>
 	</div>
 }
