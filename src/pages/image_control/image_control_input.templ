@@ -3,6 +3,7 @@ package imagecontrol
 templ InputFormImage() {
 	<div class="p-6 mr-1 max-w-md w-full h-svh mx-auto bg-white shadow-sm shadow-gray-900 rounded-lg">
 		<form
+			id="uploadImageForm"
 			class="space-y-4"
 			hx-post="/upload-image"
 			enctype="multipart/form-data"
@@ -28,22 +29,6 @@ templ InputFormImage() {
 					<option value="bilinear">Bilinear Interpolation</option>
 					<option value="bicubic">Bicubic Interpolation</option>
 				</select>
-			</div>
-			<div class="flex flex-col space-y-1">
-				<label for="width" class="text-sm font-medium text-gray-700">Width</label>
-				<input
-					type="text"
-					name="width"
-					class="rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-				/>
-			</div>
-			<div class="flex flex-col space-y-1">
-				<label for="height" class="text-sm font-medium text-gray-700">Height</label>
-				<input
-					type="text"
-					name="height"
-					class="rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-				/>
 			</div>
 			<button
 				type="submit"

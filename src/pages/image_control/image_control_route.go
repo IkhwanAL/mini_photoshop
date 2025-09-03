@@ -1,10 +1,14 @@
 package imagecontrol
 
 import (
-	"io"
+	"fmt"
+	"image"
+	"image/jpeg"
+	_ "image/jpeg"
+	"image/png"
+	_ "image/png"
 	"net/http"
 	"os"
-	"strconv"
 )
 
 type FileHeader struct {
@@ -15,7 +19,7 @@ type FileHeader struct {
 }
 
 func UploadImage(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseMultipartForm(10 << 20)
+	err := r.ParseMultipartForm(10 << 20) // Max Size
 	if err != nil {
 		http.Error(w, "failed to parse multipart form", http.StatusBadRequest)
 		return
@@ -28,37 +32,40 @@ func UploadImage(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	width, err := strconv.Atoi(r.FormValue("width"))
+	img, formatImage, err := image.Decode(file)
 	if err != nil {
-		http.Error(w, "opps failed to get width file header", http.StatusInternalServerError)
-		return
-	} 
-	height, err := strconv.Atoi(r.FormValue("height"))
-	if err != nil {
-		http.Error(w, "oops failed to get height file header", http.StatusInternalServerError)
+		http.Error(w, "oops failed to decode given image", http.StatusBadRequest)
 		return
 	}
 
 	fileHeader := FileHeader{
 		Filename: header.Filename,
-		Width: width,
-		Height: height,
+		Width: img.Bounds().Dx(),
+		Height: img.Bounds().Dy(),
 		Size: int(header.Size),
 	}
 
-	outFile, err :=os.Create("./uploads/" + header.Filename)
+	uploadPath := "./uploads/" + header.Filename
+	outFile, err := os.Create(uploadPath)
 	if err != nil {
 		http.Error(w, "unable to save file", http.StatusInternalServerError)
 		return
 	}
 
-	_, err = io.Copy(outFile, file)
+	if formatImage == "png" {
+		err = png.Encode(outFile, img)
+	} else {
+		err = jpeg.Encode(outFile, img, nil)
+	}
 	if err != nil {
 		http.Error(w, "failed to write file", http.StatusInternalServerError)
 		return
 	}
+
+	w.Header().Set("HX-Trigger", fmt.Sprintf("{\"updateCanvas\": {\"image\": \"%s\"}}", uploadPath))
 	err = OverViewImage(fileHeader).Render(r.Context(), w)
 	if err != nil {
 		http.Error(w, "failed to show result", http.StatusInternalServerError)
+		return
 	}
 }

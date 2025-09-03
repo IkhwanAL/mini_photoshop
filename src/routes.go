@@ -26,9 +26,11 @@ func ServerRoute() *http.ServeMux {
 	mux := http.NewServeMux()
 
 	assetsFs := http.FileServer(http.Dir("assets"))
-	
 	mux.Handle("GET /assets/", http.StripPrefix("/assets/", noCache(assetsFs)))
 
+	uploadFs := http.FileServer(http.Dir("uploads"))
+	mux.Handle("GET /uploads/", http.StripPrefix("/uploads/", noCache(uploadFs)))
+	
 	mux.HandleFunc("GET /", serverMainPage)
 
 	mux.HandleFunc("POST /upload-image", imagecontrol.UploadImage)
