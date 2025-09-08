@@ -8,7 +8,7 @@ package imagecontrol
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func InputFormImage() templ.Component {
+func EditOption() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,7 +29,7 @@ func InputFormImage() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"p-6 mr-1 max-w-sm w-full h-svh mx-auto bg-white shadow-sm shadow-gray-900 rounded-lg\"><form id=\"uploadImageForm\" class=\"space-y-4\" hx-post=\"/upload-image\" enctype=\"multipart/form-data\" hx-swap=\"innerHTML\" hx-target=\"#overview\"><div class=\"flex flex-col space-y-1\"><label for=\"inFile\" class=\"text-sm font-medium text-gray-700\">Input File</label> <input id=\"inFile\" type=\"file\" name=\"uploadedFile\" class=\"block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500\"></div><button type=\"submit\" class=\"w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500\">Submit</button></form><div id=\"overview\" class=\"mt-2\"></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div><div><label for=\"selectAlgo\">Scale Image</label> <select id=\"algoChoice\" name=\"algoChoice\"><option value=\"nearest-neighbor\">nearest-neighbor interpolation</option> <option value=\"bilinear-interpoloation\">bilinear-interpoloation</option> <option value=\"bicubic-interpoloation\">bicubic-interpoloation</option></select></div><button hx-include=\"algoChoice\" type=\"submit\" hx-post=\"/scale\">Scale</button></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

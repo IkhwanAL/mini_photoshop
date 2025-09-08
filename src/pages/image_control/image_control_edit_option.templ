@@ -1,0 +1,15 @@
+package imagecontrol
+
+templ EditOption() {
+	<div>
+		<div>
+			<label for="selectAlgo">Scale Image</label>
+			<select id="algoChoice" name="algoChoice">
+				<option value="nearest-neighbor">nearest-neighbor interpolation</option>
+				<option value="bilinear-interpoloation">bilinear-interpoloation</option>
+				<option value="bicubic-interpoloation">bicubic-interpoloation</option>
+			</select>
+		</div>
+		<button hx-include="algoChoice" type="submit" hx-post="/scale">Scale</button>
+	</div>
+}

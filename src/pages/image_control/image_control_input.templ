@@ -1,7 +1,7 @@
 package imagecontrol
 
 templ InputFormImage() {
-	<div class="p-6 mr-1 max-w-md w-full h-svh mx-auto bg-white shadow-sm shadow-gray-900 rounded-lg">
+	<div class="p-6 mr-1 max-w-sm w-full h-svh mx-auto bg-white shadow-sm shadow-gray-900 rounded-lg">
 		<form
 			id="uploadImageForm"
 			class="space-y-4"
@@ -18,17 +18,6 @@ templ InputFormImage() {
 					name="uploadedFile"
 					class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
 				/>
-			</div>
-			<div class="flex flex-col space-y-1">
-				<label class="text-sm font-medium text-gray-700">Scale Algorithm</label>
-				<select
-					name="algorithm"
-					class="block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-				>
-					<option value="nearest">Nearest Neighbor Interpolation</option>
-					<option value="bilinear">Bilinear Interpolation</option>
-					<option value="bicubic">Bicubic Interpolation</option>
-				</select>
 			</div>
 			<button
 				type="submit"

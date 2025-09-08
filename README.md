@@ -14,4 +14,6 @@ so right now just a simple image manipulation is enough. And let's see in the fu
 
 ## Step By Step Journey
 For now i start to build something simple like upload an image an able to edit image that's all. 
-No need to create complicated UI just upload and canvas to show / edit image. Few days manage to create upload image and paint the image to canvas
+No need to create complicated UI just upload and canvas to show / edit image. Few days manage to create upload image and paint the image to canvas.
+
+After a few days i did manage to make canvas Zoom in / Out. By using pure Javascript with a little bit a help from AI, and some human intervention manage to built with only 30 - 60 line of code (including newline). Now i want to make zoom like figma or Photoshop where i can drag the image, it will take some time, but let see.

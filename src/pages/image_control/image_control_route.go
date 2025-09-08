@@ -13,9 +13,9 @@ import (
 
 type FileHeader struct {
 	Filename string
-	Width int
-	Height int
-	Size int
+	Width    int
+	Height   int
+	Size     int
 }
 
 func UploadImage(w http.ResponseWriter, r *http.Request) {
@@ -40,9 +40,9 @@ func UploadImage(w http.ResponseWriter, r *http.Request) {
 
 	fileHeader := FileHeader{
 		Filename: header.Filename,
-		Width: img.Bounds().Dx(),
-		Height: img.Bounds().Dy(),
-		Size: int(header.Size),
+		Width:    img.Bounds().Dx(),
+		Height:   img.Bounds().Dy(),
+		Size:     int(header.Size),
 	}
 
 	uploadPath := "./uploads/" + header.Filename
@@ -62,7 +62,10 @@ func UploadImage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("HX-Trigger", fmt.Sprintf("{\"updateCanvas\": {\"image\": \"%s\"}}", uploadPath))
+	w.Header().Set(
+		"HX-Trigger",
+		fmt.Sprintf("{\"updateCanvas\": {\"image\": \"%s\", \"width\": %d, \"height\": %d}}", uploadPath, img.Bounds().Dx(), img.Bounds().Dy()),
+	)
 	err = OverViewImage(fileHeader).Render(r.Context(), w)
 	if err != nil {
 		http.Error(w, "failed to show result", http.StatusInternalServerError)
