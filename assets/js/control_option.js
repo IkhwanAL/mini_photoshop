@@ -1,5 +1,3 @@
-				<span id="brightnessValue">0</span>
-				<span id="brightnessValue">0</span>
 const filterOption = document.getElementById("filter")
 const compBrightnessContrast = document.getElementById("brightnessContrast")
 
@@ -25,3 +23,4 @@ const contrastValue = document.getElementById("contrastValue")
 contrast.addEventListener("input", ev => {
 	contrastValue.textContent = ev.target.value
 })
+
