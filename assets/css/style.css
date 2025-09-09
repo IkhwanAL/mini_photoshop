@@ -198,6 +198,9 @@
   .flex {
     display: flex;
   }
+  .table {
+    display: table;
+  }
   .h-full {
     height: 100%;
   }
