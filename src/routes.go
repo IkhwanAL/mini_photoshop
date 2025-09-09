@@ -3,8 +3,13 @@ package src
 import (
 	"net/http"
 
+	"github.com/ikhwanal/pixel_art_scaler/src/database"
 	imagecontrol "github.com/ikhwanal/pixel_art_scaler/src/pages/image_control"
 )
+
+type Server struct {
+	queries *database.Queries
+}
 
 func serverMainPage(w http.ResponseWriter, r *http.Request) {
 	main := WebHtml()
@@ -22,7 +27,7 @@ func noCache(h http.Handler) http.Handler {
 	})
 }
 
-func ServerRoute() *http.ServeMux {
+func (s *Server) ServerRoute() *http.ServeMux {
 	mux := http.NewServeMux()
 
 	assetsFs := http.FileServer(http.Dir("assets"))
@@ -33,7 +38,12 @@ func ServerRoute() *http.ServeMux {
 	
 	mux.HandleFunc("GET /", serverMainPage)
 
-	mux.HandleFunc("POST /upload-image", imagecontrol.UploadImage)
-
+	imagecontrol.Routes(mux, s.queries)
 	return mux
+}
+
+func NewServer(queries *database.Queries) *Server {
+	return &Server{
+		queries: queries,
+	}
 }
