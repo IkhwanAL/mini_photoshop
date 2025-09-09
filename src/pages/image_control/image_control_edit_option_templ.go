@@ -29,7 +29,7 @@ func EditOption() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div><div><label for=\"selectAlgo\">Scale Image</label> <select id=\"algoChoice\" name=\"algoChoice\"><option value=\"nearest-neighbor\">nearest-neighbor interpolation</option> <option value=\"bilinear-interpoloation\">bilinear-interpoloation</option> <option value=\"bicubic-interpoloation\">bicubic-interpoloation</option></select></div><button hx-include=\"algoChoice\" type=\"submit\" hx-post=\"/scale\">Scale</button></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"space-y-4\"><div class=\"flex flex-col space-y-1\"><label for=\"selectAlgo\" class=\"text-sm font-medium text-gray-700\">Scale Image</label> <select class=\"block w-full h-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer \n        focus:outline-none focus:ring-2 focus:ring-blue-500\" id=\"algoChoice\" name=\"algoChoice\"><option value=\"nearest-neighbor\">Nearest-neighbor interpolation</option> <option value=\"bilinear-interpoloation\">Bilinear-interpoloation</option> <option value=\"bicubic-interpoloation\">Bicubic-interpoloation</option></select></div><button class=\"w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 \n        focus:outline-none focus:ring-2 focus:ring-blue-500\" hx-include=\"algoChoice\" type=\"submit\" hx-post=\"/apply-scale\">Scale</button></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

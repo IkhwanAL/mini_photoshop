@@ -1,15 +1,26 @@
 package imagecontrol
 
 templ EditOption() {
-	<div>
-		<div>
-			<label for="selectAlgo">Scale Image</label>
-			<select id="algoChoice" name="algoChoice">
-				<option value="nearest-neighbor">nearest-neighbor interpolation</option>
-				<option value="bilinear-interpoloation">bilinear-interpoloation</option>
-				<option value="bicubic-interpoloation">bicubic-interpoloation</option>
+	<div class="space-y-4">
+		<div class="flex flex-col space-y-1">
+			<label for="selectAlgo" class="text-sm font-medium text-gray-700">Scale Image</label>
+			<select
+				class="block w-full h-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer 
+        focus:outline-none focus:ring-2 focus:ring-blue-500"
+				id="algoChoice"
+				name="algoChoice"
+			>
+				<option value="nearest-neighbor">Nearest-neighbor interpolation</option>
+				<option value="bilinear-interpoloation">Bilinear-interpoloation</option>
+				<option value="bicubic-interpoloation">Bicubic-interpoloation</option>
 			</select>
 		</div>
-		<button hx-include="algoChoice" type="submit" hx-post="/scale">Scale</button>
+		<button
+			class="w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 
+        focus:outline-none focus:ring-2 focus:ring-blue-500"
+			hx-include="algoChoice"
+			type="submit"
+			hx-post="/apply-scale"
+		>Scale</button>
 	</div>
 }

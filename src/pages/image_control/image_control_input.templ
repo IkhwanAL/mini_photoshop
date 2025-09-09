@@ -16,16 +16,20 @@ templ InputFormImage() {
 					id="inFile"
 					type="file"
 					name="uploadedFile"
-					class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+					class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer 
+          focus:outline-none focus:ring-2 focus:ring-blue-500"
 				/>
 			</div>
 			<button
 				type="submit"
-				class="w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+				class="w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 
+        focus:outline-none focus:ring-2 focus:ring-blue-500"
 			>
 				Submit
 			</button>
 		</form>
-		<div id="overview" class="mt-2"></div>
+		<div id="overview" class="mt-2 mb-2"></div>
+		<hr/>
+		@EditOption()
 	</div>
 }
