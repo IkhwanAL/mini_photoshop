@@ -5,7 +5,7 @@ templ EditOption() {
 		<div class="flex flex-col space-y-1">
 			<label for="selectAlgo" class="text-sm font-medium text-gray-700">Scale Image</label>
 			<select
-				class="block w-full h-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer 
+				class="block w-full h-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer 
         focus:outline-none focus:ring-2 focus:ring-blue-500"
 				id="algoChoice"
 				name="algoChoice"
@@ -14,6 +14,26 @@ templ EditOption() {
 				<option value="bilinear-interpoloation">Bilinear-interpoloation</option>
 				<option value="bicubic-interpoloation">Bicubic-interpoloation</option>
 			</select>
+		</div>
+		<div class="flex flex-col space-y-1">
+			<label for="width" class="text-sm font-medium text-gray-700">Width</label>
+			<input
+				class="block w-full h-full p-2 rounded-lg border border-gray-300"
+				type="number"
+				name="width"
+				value="width"
+				min="0"
+			/>
+		</div>
+		<div class="flex flex-col space-y-1">
+			<label for="heigth" class="text-sm font-medium text-gray-700">Height</label>
+			<input
+				class="block w-full h-full p-2 rounded-lg border border-gray-300"
+				type="number"
+				name="height"
+				value="height"
+				min="0"
+			/>
 		</div>
 		<button
 			class="w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 
@@ -27,7 +47,7 @@ templ EditOption() {
 		<div class="flex flex-col">
 			<label for="filter" class="text-sm font-medium text-gray-700">Scale Image</label>
 			<select
-				class="block w-full h-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer 
+				class="block w-full h-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer 
         focus:outline-none focus:ring-2 focus:ring-blue-500"
 				id="filter"
 				name="filter"

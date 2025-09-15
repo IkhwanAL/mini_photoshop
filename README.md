@@ -23,4 +23,4 @@ After a few days i did manage to make canvas Zoom in / Out. By using pure Javasc
 
 Successfully Built Zoom and Pan so i, after that i can visual what my project will look like, after that i added a database using sqlite to make it simple than add 2 table one table is upload image other is image tracker. upload image is quite straigth forward to store the file header but for tracker image it's the same store file header but every action user made it will be store in tracker image the reason is, when user want to undo or redo i just need to change the pointer of file to previous image.
 
-
+Yes, manage to built a ruler. Ok why ruler?, well because i want to. Think about it how do i know if the size of image in canvas without ruler, there's no way right so that why i built a ruler.
