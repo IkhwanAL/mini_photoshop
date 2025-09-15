@@ -29,7 +29,7 @@ func ViewImage() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex flex-col w-full h-svh mr-2\"><label for=\"editZone\" class=\"text-sm font-medium text-gray-700 text-center\">Edit Zone</label><div id=\"canvasWrapper\" class=\"flex-1 border border-gray-300 shadow-md rounded-lg overflow-hidden\"><canvas id=\"remoteCanvas\" class=\"w-full h-full block bg-gray-100\"></canvas></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"flex flex-col w-full h-svh mr-2\"><div class=\"flex flex-row\"><div class=\"w-5 h-5 bg-gray-200\"></div><!-- corner box --><canvas id=\"rulerTop\" class=\"flex-1 h-5 bg-gray-100\"></canvas></div><div class=\"flex flex-row flex-1\"><canvas id=\"rulerLeft\" class=\"w-5 bg-gray-100\"></canvas><div id=\"canvasWrapper\" class=\"flex-1 border border-gray-300 shadow-md rounded-lg overflow-hidden\"><canvas id=\"remoteCanvas\" class=\"w-full h-full bg-gray-100 hidden\"></canvas></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
