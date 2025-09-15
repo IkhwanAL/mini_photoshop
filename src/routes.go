@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/ikhwanal/pixel_art_scaler/src/database"
-	imagecontrol "github.com/ikhwanal/pixel_art_scaler/src/pages/image_control"
+	imagecontrol "github.com/ikhwanal/pixel_art_scaler/src/features/image_control"
 )
 
 type Server struct {

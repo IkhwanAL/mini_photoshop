@@ -8,7 +8,7 @@ package src
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "github.com/ikhwanal/pixel_art_scaler/src/pages/image_control"
+import "github.com/ikhwanal/pixel_art_scaler/src/features/image_control"
 
 func WebHtml() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {

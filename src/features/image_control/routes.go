@@ -68,7 +68,7 @@ func uploadImageHadler(q *database.Queries) http.HandlerFunc {
 		}
 
 		id, err := q.UploadImage(r.Context(), database.UploadImageParams{
-			Filename: header.Filename,
+			Filename:         header.Filename,
 			CurrentVersionID: 1,
 		})
 		if err != nil {
@@ -77,10 +77,10 @@ func uploadImageHadler(q *database.Queries) http.HandlerFunc {
 		}
 
 		_, err = q.AddImageToTrack(r.Context(), database.AddImageToTrackParams{
-			ImageID: id,
+			ImageID:         id,
 			ParentVersionID: 0,
-			Filename: header.Filename,
-			Operation: "Init",
+			Filename:        header.Filename,
+			Operation:       "Init",
 		})
 		if err != nil {
 			http.Error(w, "unable to load an image", http.StatusInternalServerError)
