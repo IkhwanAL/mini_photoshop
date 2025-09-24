@@ -8,7 +8,9 @@ package imagecontrol
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func EditOption() templ.Component {
+import "strconv"
+
+func EditOption(header FileHeader, imageId int64) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,7 +31,37 @@ func EditOption() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"space-y-4\"><div class=\"flex flex-col space-y-1\"><label for=\"selectAlgo\" class=\"text-sm font-medium text-gray-700\">Scale Image</label> <select class=\"block w-full h-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer \n        focus:outline-none focus:ring-2 focus:ring-blue-500\" id=\"algoChoice\" name=\"algoChoice\"><option value=\"nearest-neighbor\">Nearest-neighbor interpolation</option> <option value=\"bilinear-interpoloation\">Bilinear-interpoloation</option> <option value=\"bicubic-interpoloation\">Bicubic-interpoloation</option></select></div><div class=\"flex flex-col space-y-1\"><label for=\"width\" class=\"text-sm font-medium text-gray-700\">Width</label> <input class=\"block w-full h-full p-2 rounded-lg border border-gray-300\" type=\"number\" name=\"width\" value=\"width\" min=\"0\"></div><div class=\"flex flex-col space-y-1\"><label for=\"heigth\" class=\"text-sm font-medium text-gray-700\">Height</label> <input class=\"block w-full h-full p-2 rounded-lg border border-gray-300\" type=\"number\" name=\"height\" value=\"height\" min=\"0\"></div><button class=\"w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 \n        focus:outline-none focus:ring-2 focus:ring-blue-500\" hx-include=\"algoChoice\" type=\"submit\" hx-post=\"/apply-scale\">Scale</button></div><div class=\"space-y-4\"><div class=\"flex flex-col\"><label for=\"filter\" class=\"text-sm font-medium text-gray-700\">Scale Image</label> <select class=\"block w-full h-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer \n        focus:outline-none focus:ring-2 focus:ring-blue-500\" id=\"filter\" name=\"filter\"><option value=\"grayscale\">Grayscale</option> <option value=\"invert\">Invert</option> <option value=\"sepia\">Sepia</option> <option value=\"brightness-contrast\">Brightness / Contrast</option></select></div><div class=\"hidden\" id=\"brightnessContrast\"><label for=\"brightness\"><span>Brightness</span> <span id=\"brightnessValue\">0</span></label> <input class=\"w-full\" id=\"brightness\" type=\"range\" name=\"brightness\" value=\"0\" min=\"-100\" max=\"100\"> <label for=\"contrast\"><span>Contrast</span> <span id=\"contrastValue\">0</span></label> <input class=\"w-full\" id=\"contrast\" type=\"range\" name=\"contrast\" value=\"0\" min=\"-100\" max=\"100\"></div><button class=\"w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 \n        focus:outline-none focus:ring-2 focus:ring-blue-500\" hx-include=\"algoChoice\" type=\"submit\" hx-post=\"/apply-filter\">Filter</button></div>")
+		templ_7745c5c3_Err = OverViewImage(header).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<hr><form hx-post=\"/apply-scale\"><input class=\"hidden\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var2 string
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatInt(imageId, 10))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src/features/image_control/edit_option.templ`, Line: 9, Col: 62}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" name=\"imageId\"><div class=\"space-y-4\"><div class=\"flex flex-col space-y-1\"><label for=\"selectAlgo\" class=\"text-sm font-medium text-gray-700\">Scale Image</label> <select class=\"block w-full h-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer \n        focus:outline-none focus:ring-2 focus:ring-blue-500\" id=\"algoChoice\" name=\"algoChoice\"><option value=\"nearest-neighbor\">Nearest-neighbor interpolation</option> <option value=\"bilinear-interpoloation\">Bilinear-interpoloation</option> <option value=\"bicubic-interpoloation\">Bicubic-interpoloation</option></select></div><div class=\"flex flex-col space-y-1\"><label for=\"width\" class=\"text-sm font-medium text-gray-700\">Width</label> <input class=\"block w-full h-full p-2 rounded-lg border border-gray-300\" type=\"number\" name=\"width\" value=\"width\" min=\"0\"></div><div class=\"flex flex-col space-y-1\"><label for=\"heigth\" class=\"text-sm font-medium text-gray-700\">Height</label> <input class=\"block w-full h-full p-2 rounded-lg border border-gray-300\" type=\"number\" name=\"height\" value=\"height\" min=\"0\"></div><button class=\"w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 \n        focus:outline-none focus:ring-2 focus:ring-blue-500\" type=\"submit\">Scale</button></div></form><form><input class=\"hidden\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.FormatInt(imageId, 10))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `src/features/image_control/edit_option.templ`, Line: 52, Col: 62}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" name=\"imageId\"><div class=\"space-y-4\"><div class=\"flex flex-col\"><label for=\"filter\" class=\"text-sm font-medium text-gray-700\">Filter Image</label> <select class=\"block w-full h-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer \n        focus:outline-none focus:ring-2 focus:ring-blue-500\" id=\"filter\" name=\"filter\"><option value=\"grayscale\">Grayscale</option> <option value=\"invert\">Invert</option> <option value=\"sepia\">Sepia</option> <option value=\"brightness-contrast\">Brightness / Contrast</option></select></div><div class=\"hidden\" id=\"brightnessContrast\"><label for=\"brightness\"><span>Brightness</span> <span id=\"brightnessValue\">0</span></label> <input class=\"w-full\" id=\"brightness\" type=\"range\" name=\"brightness\" value=\"0\" min=\"-100\" max=\"100\"> <label for=\"contrast\"><span>Contrast</span> <span id=\"contrastValue\">0</span></label> <input class=\"w-full\" id=\"contrast\" type=\"range\" name=\"contrast\" value=\"0\" min=\"-100\" max=\"100\"></div><button class=\"w-full rounded-md bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 \n        focus:outline-none focus:ring-2 focus:ring-blue-500\" hx-include=\"algoChoice\" type=\"submit\" hx-post=\"/apply-filter\">Filter</button></div></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

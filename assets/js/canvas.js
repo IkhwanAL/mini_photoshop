@@ -4,15 +4,69 @@
 const canvas = document.getElementById("remoteCanvas")
 const ctx = canvas.getContext("2d")
 
-let canvasState = {
-  zoom: 1,
-  offsetX: 0,
-  offsetY: 0,
-  isDragging: false,
-  image: null,
-  lastXPosition: 0, // Last Mouse Position Recorded When Pressing Mouse
-  lastYPosition: 0, // Last Mouse Position Recorded When Pressing Mouse
+class CanvasState extends EventTarget {
+  constructor() {
+    super()
+    this._zoom = 1
+    this._offsetX = 0
+    this._offsetY = 0
+    this._isDragging = false
+    this._image = null
+    this._lastX = 0
+    this._lastY = 0
+  }
+
+  get zoom() { return this._zoom }
+  set zoom(val) {
+    if (this._zoom != val) {
+      this._zoom = val
+      this.dispatchEvent(new Event("change"))
+    }
+  }
+
+  get lastX() { return this._lastX }
+  set lastX(val) {
+    if (this._lastX != val) {
+      this._lastX = val
+    }
+  }
+  get lastY() { return this._lastY }
+  set lastY(val) {
+    if (this._lastY != val) {
+      this._lastY = val
+    }
+  }
+
+  get isDragging() { return this._isDragging }
+  set isDragging(val) {
+    if (this._isDragging != val) {
+      this._isDragging = val
+    }
+  }  
+  
+  get offsetX() { return this._offsetX }
+  get offsetY() { return this._offsetY }
+  
+  setOffsetXY = (deltaX, deltaY) => {
+    this._offsetX += deltaX
+    this._offsetY += deltaY
+
+    this.dispatchEvent(new Event("change"))
+  }
 }
+
+const canvasState = new CanvasState()
+
+canvasState.addEventListener("change", () => {
+  requestAnimationFrame(() => {
+    scheduleRedraw()
+  })
+})
+
+/**
+ * @type {AbortController}
+ */
+let loadController = null
 
 // HTMX-Js Will Listen Any Header For Go With HX-Trigger
 document.body.addEventListener("updateCanvas", evt => {
@@ -22,18 +76,18 @@ document.body.addEventListener("updateCanvas", evt => {
     resizeCanvas(canvas, ctx)
   }
 
+  if (loadController) loadController.abort()
+  loadController = new AbortController()
+
   const image = new Image()
+  image.src = evt.detail.image
 
   image.onload = ev => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.drawImage(image, 0, 0)
+    canvasState.image = image
+    draw()
   }
-  image.src = evt.detail.image
-
-  canvasState.image = image
-
-  draw()
-
 })
 
 function draw() {
@@ -45,6 +99,18 @@ function draw() {
   ctx.drawImage(canvasState.image, 0, 0)
 
   drawRuler()
+}
+
+let needsRedraw = false
+
+function scheduleRedraw() {
+  if (!needsRedraw) {
+    needsRedraw = true
+    requestAnimationFrame(() => {
+      draw()
+      needsRedraw = false
+    })
+  }
 }
 
 // Where Dragging Start
@@ -60,20 +126,20 @@ canvas.addEventListener("mousemove", (ev) => {
   const deltaX = ev.clientX - canvasState.lastXPosition
   const deltaY = ev.clientY - canvasState.lastYPosition
 
-  canvasState.offsetX += deltaX
-  canvasState.offsetY += deltaY
+  // canvasState.offsetX += deltaX
+  // canvasState.offsetY += deltaY
+
+  canvasState.setOffsetXY(deltaX, deltaY)
 
   canvasState.lastXPosition = ev.clientX
   canvasState.lastYPosition = ev.clientY
 
-  draw()
 })
 
 canvas.addEventListener("mouseup", () => canvasState.isDragging = false)
 canvas.addEventListener("mouseleave", () => canvasState.isDragging = false)
 
 canvas.addEventListener("wheel", ev => {
-  console.log("Scroll")
 
   if (ev.deltaY < 0) {
     canvasState.zoom *= 1.1
@@ -81,7 +147,6 @@ canvas.addEventListener("wheel", ev => {
     canvasState.zoom /= 1.1
   }
 
-  draw()
 })
 
 /**
@@ -107,7 +172,6 @@ function drawRuler() {
   ctxTopRuler.fillStyle = ctxLeftRuler.fillStyle = "#444";
   ctxTopRuler.font = ctxLeftRuler.font = "10px sans-sarif"
 
-  console.log("HORIZONTAL RULER")
   for (let x = offsetX % (spacing * zoom); x < rulerTop.width; x += spacing * zoom) {
     const worldX = Math.round((x - offsetX) / zoom)
     ctxTopRuler.beginPath()
@@ -115,12 +179,12 @@ function drawRuler() {
     ctxTopRuler.lineTo(x, rulerTop.height - 5)
     ctxTopRuler.stroke()
     if (worldX % 100 == 0) ctxTopRuler.fillText(worldX, x, 10)
-  } 
+  }
   for (let y = offsetY % (spacing * zoom); y < rulerLeft.height; y += spacing * zoom) {
     const worldY = Math.round((y - offsetY) / zoom)
     ctxLeftRuler.beginPath()
     ctxLeftRuler.moveTo(rulerLeft.width, y)
-    ctxLeftRuler.lineTo(rulerLeft.width -2, y)
+    ctxLeftRuler.lineTo(rulerLeft.width - 2, y)
     ctxLeftRuler.stroke()
     if (worldY % 100 == 0) ctxLeftRuler.fillText(worldY, 2, y)
   }

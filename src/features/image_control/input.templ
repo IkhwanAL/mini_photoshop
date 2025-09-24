@@ -1,7 +1,7 @@
 package imagecontrol
 
 templ InputFormImage() {
-	<div class="p-6 mr-1 max-w-sm w-full h-svh mx-auto bg-white shadow-sm shadow-gray-900 rounded-lg">
+	<div class="p-6 mr-1 max-w-sm w-full h-svh mx-auto bg-white shadow-sm shadow-gray-900 rounded-lg overflow-auto">
 		<form
 			id="uploadImageForm"
 			class="space-y-4"
@@ -29,7 +29,5 @@ templ InputFormImage() {
 			</button>
 		</form>
 		<div id="overview" class="mt-2 mb-2"></div>
-		<hr/>
-		@EditOption()
 	</div>
 }

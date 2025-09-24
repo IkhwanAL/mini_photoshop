@@ -1,0 +1,7 @@
+#remoteCanvas:not(.hidden) + #rulerTop {
+  background: lightblue
+}
+
+#remoteCanvas {
+  cursor: crosshair
+}

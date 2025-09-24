@@ -92,10 +92,16 @@ func uploadImageHadler(q *database.Queries) http.HandlerFunc {
 			fmt.Sprintf("{\"updateCanvas\": {\"image\": \"%s\", \"width\": %d, \"height\": %d, \"image_id\": %d}}", uploadPath, img.Bounds().Dx(), img.Bounds().Dy(), id),
 		)
 
-		err = OverViewImage(fileHeader).Render(r.Context(), w)
+		err = EditOption(fileHeader, id).Render(r.Context(), w)
 		if err != nil {
 			http.Error(w, "failed to show result", http.StatusInternalServerError)
 			return
 		}
+	}
+}
+
+func applyScale(q *database.Queries) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
 	}
 }
